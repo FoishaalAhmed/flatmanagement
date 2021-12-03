@@ -17,7 +17,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::orderBy('name', 'asc')->get();
+        $users = User::whereHas("roles", function ($q) {
+            $q->where("name", "Admin");
+        })->orderBy('name', 'asc')->get();
         return view('backend.admin.users.index', compact('users'));
     }
 

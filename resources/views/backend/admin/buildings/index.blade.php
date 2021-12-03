@@ -24,7 +24,7 @@
                                     <th width="5%">{{ __('Sl') }}</th>
                                     <th width="25%">{{ __('Name') }}</th>
                                     <th width="10%">{{ __('Floor') }}</th>
-                                    <th width="10%">{{ __('Unit') }}</th>
+                                    <th width="10%">{{ __('Flat') }}</th>
                                     <th width="10%">{{ __('Guard') }}</th>
                                     <th width="10%">{{ __('CCTV') }}</th>
                                     <th width="10%">{{ __('Parking') }}</th>
@@ -33,12 +33,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($buildings as $item)
+                                @foreach ($buildings as $key => $item)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->floor }}</td>
-                                        <td>{{ $item->unit }}</td>
+                                        <td>{{ $item->flat }}</td>
                                         <td>{{ $item->guard }}</td>
                                         <td>{{ $item->cctv }}</td>
                                         <td>{{ $item->parking }}</td>

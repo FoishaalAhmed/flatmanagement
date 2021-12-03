@@ -37,6 +37,10 @@
         href="{{ asset('public/frontend/plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('public/frontend/plugins/table/datatable/dt-global_style.css') }}">
+    <link href="{{ asset('public/frontend/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/plugins/select2/select2.min.css') }}">
+    <link href="{{ asset('public/frontend/assets/css/components/custom-modal.css') }}" rel="stylesheet"
+        type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
     <!--  END CUSTOM STYLE FILE  -->
 
@@ -199,6 +203,9 @@
     <script src="{{ asset('public/frontend/plugins/sweetalerts/custom-sweetalert.js') }}"></script>
     <script src="{{ asset('public/frontend/plugins/sweetalerts/promise-polyfill.js') }}"></script>
     <script src="{{ asset('public/frontend/plugins/table/datatable/datatables.js') }}"></script>
+    <script src="{{ asset('public/frontend/assets/js/scrollspyNav.js') }}"></script>
+    <script src="{{ asset('public/frontend/plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('public/frontend/plugins/select2/custom-select2.js') }}"></script>
     <!--  END CUSTOM SCRIPTS FILE  -->
 
     <script>
@@ -254,6 +261,10 @@
                 targets: [4],
                 orderData: [4, 0]
             }]
+        });
+
+        $(".tagging").select2({
+            tags: true
         });
     </script>
 

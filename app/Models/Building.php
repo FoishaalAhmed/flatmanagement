@@ -10,13 +10,13 @@ class Building extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'floor', 'unit', 'cctv', 'guard', 'parking', 'address', 'photo',
+        'name', 'floor', 'flat', 'cctv', 'guard', 'parking', 'address', 'photo',
     ];
 
     public static $validateRule = [
         'name' => ['required', 'string', 'max: 255'],
         'floor' => ['required', 'numeric', 'min: 1'],
-        'unit' => ['required', 'numeric', 'min: 1'],
+        'flat' => ['required', 'numeric', 'min: 1'],
         'cctv' => ['required', 'numeric', 'between:0,1'],
         'guard' => ['required', 'numeric', 'between:0,1'],
         'parking' => ['required', 'numeric', 'between:0,1'],
@@ -40,7 +40,7 @@ class Building extends Model
 
         $this->name = $request->name;
         $this->floor = $request->floor;
-        $this->unit = $request->unit;
+        $this->flat = $request->flat;
         $this->cctv = $request->cctv;
         $this->guard = $request->guard;
         $this->parking = $request->parking;
@@ -68,7 +68,7 @@ class Building extends Model
 
         $building->name = $request->name;
         $building->floor = $request->floor;
-        $building->unit = $request->unit;
+        $building->flat = $request->flat;
         $building->cctv = $request->cctv;
         $building->guard = $request->guard;
         $building->parking = $request->parking;

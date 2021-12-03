@@ -17,7 +17,7 @@ class CreateBuildingsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('floor');
-            $table->integer('unit');
+            $table->integer('flat');
             $table->boolean('cctv')->default(true);
             $table->boolean('guard')->default(true);
             $table->boolean('parking')->default(true);

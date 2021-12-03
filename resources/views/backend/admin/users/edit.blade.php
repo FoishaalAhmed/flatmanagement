@@ -20,7 +20,8 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         @include('includes.error')
-                        <form method="post" action="{{ route('admin.users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.users.update', $user->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">
@@ -64,7 +65,8 @@
                                         <div class="widget-content widget-content-area">
                                             <h3 class="">{{ __('Admin Photo') }}</h3>
                                             <div class="text-center user-info">
-                                                <img src="{{ asset($user->photo) }}" alt="avatar" id="user-photo">
+                                                <img src="{{ asset($user->photo) }}" alt="avatar" id="user-photo"
+                                                    style="width: 100px; height: 100px;">
                                                 <p class="text-danger">
                                                     *{{ __('Photo Can Not Be Greater Than 100 KB') }}</p>
                                                 <input type="file" id="input-file-max-fs" class="dropify"

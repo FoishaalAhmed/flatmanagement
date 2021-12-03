@@ -44,9 +44,9 @@
                                         </div>
                                         <div class="col-lg-4 col-12 mx-auto">
                                             <div class="form-group">
-                                                <label for="t-text">{{ __('Unit') }}</label>
-                                                <input type="number" name="unit" placeholder="{{ __('Unit') }}"
-                                                    class="form-control" autocomplete="off" value="{{ old('unit') }}">
+                                                <label for="t-text">{{ __('Flat') }}</label>
+                                                <input type="number" name="flat" placeholder="{{ __('Flat') }}"
+                                                    class="form-control" autocomplete="off" value="{{ old('flat') }}">
                                             </div>
                                         </div>
                                     </div>

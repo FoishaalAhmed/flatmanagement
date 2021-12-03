@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Update Building')
+@section('title', 'New Manager')
 @section('content')
     <div class="layout-px-spacing">
         <div class="row layout-top-spacing">
@@ -10,20 +10,19 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-6 col-md-6 col-sm-6 col-6">
-                                <h4>{{ __('Update Building') }}</h4>
+                                <h4>{{ __('New Manager') }}</h4>
                             </div>
                             <div class="col-xl-6 col-md-6 col-sm-6 col-6 text-right">
                                 <a class="btn btn-outline-primary mb-2"
-                                    href="{{ route('admin.buildings.index') }}">{{ __('Building List') }}</a>
+                                    href="{{ route('admin.managers.index') }}">{{ __('Manager List') }}</a>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
                         @include('includes.error')
-                        <form method="post" action="{{ route('admin.buildings.update', $building->id) }}" method="POST"
+                        <form method="post" action="{{ route('admin.managers.store') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
-                            @method('PUT')
                             <div class="row">
                                 <div class="col-lg-9">
                                     <div class="row">
@@ -32,77 +31,58 @@
                                                 <label for="t-text">{{ __('Name') }}</label>
                                                 <input type="text" name="name" placeholder="{{ __('Name') }}"
                                                     class="form-control" required autocomplete="off"
-                                                    value="{{ $building->name }}">
+                                                    value="{{ old('name') }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-12 mx-auto">
                                             <div class="form-group">
-                                                <label for="t-text">{{ __('Floor') }}</label>
-                                                <input type="number" name="floor" placeholder="{{ __('Floor') }}"
+                                                <label for="t-text">{{ __('E-mail') }}</label>
+                                                <input type="email" name="email" placeholder="{{ __('E-mail') }}"
                                                     class="form-control" required autocomplete="off"
-                                                    value="{{ $building->floor }}">
+                                                    value="{{ old('email') }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-12 mx-auto">
                                             <div class="form-group">
-                                                <label for="t-text">{{ __('Flat') }}</label>
-                                                <input type="number" name="flat" placeholder="{{ __('Flat') }}"
-                                                    class="form-control" autocomplete="off"
-                                                    value="{{ $building->flat }}">
+                                                <label for="t-text">{{ __('Phone') }}</label>
+                                                <input type="text" name="phone" placeholder="{{ __('Phone') }}"
+                                                    class="form-control" autocomplete="off" value="{{ old('phone') }}">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-4 mb-xl-0 mb-2">
-                                            <label for="t-text">{{ __('Guard') }}</label>
-                                            <select class="form-control" name="guard" required="">
-                                                <option value="1" @if ($building->guard == 1)
-                                                    {{ 'selected' }}
-
-                                                    @endif>{{ __('Available') }}</option>
-
-                                                <option value="0" @if ($building->guard == 0)
-                                                    {{ 'selected' }}
-
-                                                    @endif>{{ __('Not Available') }}</option>
-                                            </select>
+                                        <div class="col-lg-4 col-12 mx-auto">
+                                            <div class="form-group">
+                                                <label for="t-text">{{ __('Password') }}</label>
+                                                <input type="text" name="password" placeholder="{{ __('Password') }}"
+                                                    class="form-control" autocomplete="off">
+                                            </div>
                                         </div>
-                                        <div class="col-xl-4 mb-xl-0 mb-2">
-                                            <label for="t-text">{{ __('CCTV') }}</label>
-                                            <select class="form-control" name="cctv" required="">
-                                                <option value="1" @if ($building->cctv == 1)
-                                                    {{ 'selected' }}
-
-                                                    @endif>{{ __('Available') }}</option>
-
-                                                <option value="0" @if ($building->cctv == 0)
-                                                    {{ 'selected' }}
-
-                                                    @endif>{{ __('Not Available') }}</option>
-                                            </select>
+                                        <div class="col-lg-4 col-12 mx-auto">
+                                            <div class="form-group">
+                                                <label for="t-text">{{ __('Confirm Password') }}</label>
+                                                <input type="text" name="password_confirmation"
+                                                    placeholder="{{ __('Confirm Password') }}" class="form-control"
+                                                    autocomplete="off">
+                                            </div>
                                         </div>
-                                        <div class="col-xl-4 mb-xl-0 mb-2">
-                                            <label for="t-text">{{ __('Parking') }}</label>
-                                            <select class="form-control" name="parking" required="">
-                                                <option value="1" @if ($building->parking == 1)
-                                                    {{ 'selected' }}
-
-                                                    @endif>{{ __('Available') }}</option>
-
-                                                <option value="0" @if ($building->parking == 0)
-                                                    {{ 'selected' }}
-
-                                                    @endif>{{ __('Not Available') }}</option>
-                                            </select>
+                                        <div class="col-lg-4 col-12 mx-auto">
+                                            <div class="form-group">
+                                                <label for="t-text">{{ __('Buildings') }}</label>
+                                                <select class="form-control form-small tagging" multiple="multiple"
+                                                    name="building_id[]" required>
+                                                    @foreach ($buildings as $item)
+                                                        <option value="{{ $item->id }}" @if (old('building_id'))
+                                                            @if (in_array($item->id, old('building_id'))) {{ 'selected' }} @endif
+                                                    @endif>{{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 mx-auto mb-2">
+                                        <div class="col-12">
                                             <div class="form-group">
                                                 <label for="address">{{ __('Address') }}</label>
                                                 <textarea class="form-control" placeholder="{{ __('Address') }}"
                                                     rows="3" name="address"
-                                                    autocomplete="off">{{ $building->address }}</textarea>
+                                                    autocomplete="off">{{ old('address') }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -110,10 +90,9 @@
                                 <div class="col-lg-3 layout-top-spacing">
                                     <div class="education layout-spacing ">
                                         <div class="widget-content widget-content-area">
-                                            <h3 class="">{{ __('Building Photo') }}</h3>
+                                            <h3 class="">{{ __('Manager Photo') }}</h3>
                                             <div class="text-center user-info">
-                                                <img src="{{ asset($building->photo) }}" alt="avatar" id="building-photo"
-                                                    style="width: 100px; height: 100px;">
+                                                <img src="//placehold.it/100x100" alt="avatar" id="manager-photo">
                                                 <p class="text-danger">
                                                     *{{ __('Photo Can Not Be Greater Than 100 KB') }}</p>
                                                 <input type="file" id="input-file-max-fs" class="dropify"
@@ -127,7 +106,7 @@
                                         <button class="btn btn-outline-danger mb-2"
                                             type="reset">{{ __('Reset') }}</button>
                                         <button class="btn btn-outline-primary mb-2"
-                                            type="submit">{{ __('Update') }}</button>
+                                            type="submit">{{ __('Save') }}</button>
                                     </center>
                                 </div>
                             </div>
@@ -147,7 +126,7 @@
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#building-photo')
+                    $('#manager-photo')
                         .attr('src', e.target.result)
                         .width(100)
                         .height(100);
