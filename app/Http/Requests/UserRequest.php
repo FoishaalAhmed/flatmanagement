@@ -25,31 +25,23 @@ class UserRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            
             'name'     => 'required|string|max:255',
             'photo'    => 'mimes:jpeg,jpg,png,gif,webp|max:100|nullable',
             'address'  => 'nullable|string',
         ];
 
         if ($this->getMethod() == 'POST') {
-
             return $rules + [
-
                 'password' => 'required|string|min:8|confirmed',
                 'email'    => 'required|email|max:255|unique:users,email',
                 'phone'    => 'required|string|max:15|unique:users,phone',
-                
             ];
-
         } else {
 
             return $rules + [
-
-                'email' => 'required|email|max:255|unique:users,email,'.$this->user,
-                'phone' => 'required|string|max:15|unique:users,phone,' . $this->user,
-
+                'email' => 'required|email|max:255|unique:users,email,' . $this->user()->id,
+                'phone' => 'nullable|string|max:15|unique:users,phone,' . $this->user()->id,
             ];
         }
-        
     }
 }

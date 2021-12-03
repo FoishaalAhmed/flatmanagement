@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable
 {
@@ -55,7 +56,8 @@ class User extends Authenticatable
         $userStore       = $this->save();
 
         $user_info = $this::findOrFail($this->id);
-        $user_info->assignRole($request->role);
+        $role = Role::where('name', 'Admin')->first();
+        $user_info->assignRole($role);
 
         $userStore
             ? session()->flash('success', 'New User Created Successfully!')
@@ -84,9 +86,6 @@ class User extends Authenticatable
         $user->address   = $request->address;
         $userUpdate      = $user->save();
 
-        $user->removeRole($user->roles->first());
-        $user->assignRole($request->role);
-
         $userUpdate
             ? session()->flash('success', 'User Updated Successfully!')
             : session()->flash('error', 'Something Went Wrong!');
@@ -95,7 +94,7 @@ class User extends Authenticatable
     public function destroyUser(Object $user)
     {
         if (file_exists($user->photo)) unlink($user->photo);
-
+        $user->removeRole($user->roles->first());
         $userDelete = $user->delete();
 
         $userDelete

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -18,14 +17,13 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::with('roles')->get();
+        $users = User::orderBy('name', 'asc')->get();
         return view('backend.admin.users.index', compact('users'));
     }
 
     public function create()
     {
-        $roles = Role::select('id', 'name')->get();
-        return view('backend.admin.users.create', compact('roles'));
+        return view('backend.admin.users.create');
     }
 
     public function store(UserRequest $request)
@@ -34,11 +32,9 @@ class UserController extends Controller
         return back();
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::with('roles')->findOrFail($id);
-        $roles = Role::select('id', 'name')->get();
-        return view('backend.admin.users.edit', compact('user', 'roles'));
+        return view('backend.admin.users.edit', compact('user'));
     }
 
     public function update(UserRequest $request, User $user)

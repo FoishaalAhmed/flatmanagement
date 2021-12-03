@@ -33,6 +33,11 @@
         type="text/css" />
     <link href="{{ asset('public/frontend/assets/css/components/custom-sweetalert.css') }}" rel="stylesheet"
         type="text/css" />
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('public/frontend/plugins/table/datatable/datatables.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('public/frontend/plugins/table/datatable/dt-global_style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
     <!--  END CUSTOM STYLE FILE  -->
 
 </head>
@@ -83,10 +88,11 @@
                                     </svg> Profile</a>
                             </div>
                             <div class="dropdown-item">
-                                <a class="" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><svg xmlns="http://www.w3.org/2000/svg"
-                                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-log-out">
+                                <a class="" href="#"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-log-out">
                                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                         <polyline points="16 17 21 12 16 7"></polyline>
                                         <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -150,7 +156,7 @@
             <div class="footer-wrapper">
                 <div class="footer-section f-section-1">
                     <p class="">Copyright © 2021 <a target="_blank"
-                            href="https://designreset.com/">DesignReset</a>, All
+                            href="https://ictbanglabd.com/">Ictbanglabd</a>, All
                         rights reserved.</p>
                 </div>
                 <div class="footer-section f-section-2">
@@ -192,14 +198,15 @@
     <script src="{{ asset('public/frontend/plugins/sweetalerts/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('public/frontend/plugins/sweetalerts/custom-sweetalert.js') }}"></script>
     <script src="{{ asset('public/frontend/plugins/sweetalerts/promise-polyfill.js') }}"></script>
+    <script src="{{ asset('public/frontend/plugins/table/datatable/datatables.js') }}"></script>
     <!--  END CUSTOM SCRIPTS FILE  -->
 
     <script>
         const toast = swal.mixin({
             toast: true,
-            position: 'top-end',
+            position: 'center',
             showConfirmButton: false,
-            timer: 3000,
+            timer: 2000,
             padding: '2em'
         });
         @if (session()->has('success') || session()->has('error'))
@@ -217,6 +224,37 @@
                 })
             @endif
         @endif
+    </script>
+
+    <script>
+        $('#multi-column-ordering').DataTable({
+            "dom": "<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>" +
+                "<'table-responsive'tr>" +
+                "<'dt--bottom-section d-sm-flex justify-content-sm-between text-center'<'dt--pages-count  mb-sm-0 mb-3'i><'dt--pagination'p>>",
+            "oLanguage": {
+                "oPaginate": {
+                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
+                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
+                },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+                "sLengthMenu": "Results :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [7, 10, 20, 50],
+            "pageLength": 7,
+            columnDefs: [{
+                targets: [0],
+                orderData: [0, 1]
+            }, {
+                targets: [1],
+                orderData: [1, 0]
+            }, {
+                targets: [4],
+                orderData: [4, 0]
+            }]
+        });
     </script>
 
     @section('footer')
