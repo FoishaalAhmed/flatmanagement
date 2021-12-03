@@ -39,8 +39,8 @@ class UserRequest extends FormRequest
         } else {
 
             return $rules + [
-                'email' => 'required|email|max:255|unique:users,email,' . $this->user()->id,
-                'phone' => 'nullable|string|max:15|unique:users,phone,' . $this->user()->id,
+                'email' => 'required|email|max:255|unique:users,email,' . $this->user->id,
+                'phone' => 'nullable|string|max:15|unique:users,phone,' . $this->user->id,
             ];
         }
     }

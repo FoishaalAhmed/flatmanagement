@@ -36,7 +36,6 @@ class User extends Authenticatable
     public function storeUser(Object $request)
     {
         $image = $request->file('photo');
-
         if ($image) {
 
             $image_name      = date('YmdHis');

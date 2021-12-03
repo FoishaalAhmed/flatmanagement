@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'All Admin')
+@section('title', 'All Building')
 @section('content')
     <div class="layout-px-spacing">
         <div class="row layout-top-spacing">
@@ -9,11 +9,11 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-6 col-md-6 col-sm-6 col-6">
-                                <h4>{{ __('All Admin') }}</h4>
+                                <h4>{{ __('All Building') }}</h4>
                             </div>
                             <div class="col-xl-6 col-md-6 col-sm-6 col-6 text-right">
                                 <a class="btn btn-outline-primary mb-2"
-                                    href="{{ route('admin.users.create') }}">{{ __('New Admin') }}</a>
+                                    href="{{ route('admin.buildings.create') }}">{{ __('New Building') }}</a>
                             </div>
                         </div>
                     </div>
@@ -22,22 +22,26 @@
                             <thead>
                                 <tr>
                                     <th width="5%">{{ __('Sl') }}</th>
-                                    <th width="15%">{{ __('Name') }}</th>
-                                    <th width="20%">{{ __('E-mail') }}</th>
-                                    <th width="15%">{{ __('Phone') }}</th>
-                                    <th width="25%">{{ __('Address') }}</th>
+                                    <th width="25%">{{ __('Name') }}</th>
+                                    <th width="10%">{{ __('Floor') }}</th>
+                                    <th width="10%">{{ __('Unit') }}</th>
+                                    <th width="10%">{{ __('Guard') }}</th>
+                                    <th width="10%">{{ __('CCTV') }}</th>
+                                    <th width="10%">{{ __('Parking') }}</th>
                                     <th width="10%">{{ __('Photo') }}</th>
                                     <th width="10%">{{ __('Action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $item)
+                                @foreach ($buildings as $item)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>{{ $item->phone }}</td>
-                                        <td>{{ $item->address }}</td>
+                                        <td>{{ $item->floor }}</td>
+                                        <td>{{ $item->unit }}</td>
+                                        <td>{{ $item->guard }}</td>
+                                        <td>{{ $item->cctv }}</td>
+                                        <td>{{ $item->parking }}</td>
                                         <td>
                                             <div class="d-flex">
                                                 <div class="usr-img-frame mr-2 rounded-circle">
@@ -48,13 +52,13 @@
                                         </td>
                                         <td>
                                             <a class="btn btn-sm btn-outline-primary mb-2"
-                                                href="{{ route('admin.users.edit', $item->id) }}" title="Edit"><i
+                                                href="{{ route('admin.buildings.edit', $item->id) }}" title="Edit"><i
                                                     class="far fa-edit"></i></a>
                                             <a class="btn btn-sm btn-outline-danger mb-2" title="Delete" href=""
                                                 onclick="if(confirm('Are You Sure To Delete?')){ event.preventDefault(); getElementById('delete-form-{{ $item->id }}').submit(); } else { event.preventDefault(); }"><i
                                                     class="far fa-times-circle"></i></a>
-                                            <form action="{{ route('admin.users.destroy', [$item->id]) }}" method="post"
-                                                style="display: none;" id="delete-form-{{ $item->id }}">
+                                            <form action="{{ route('admin.buildings.destroy', [$item->id]) }}"
+                                                method="post" style="display: none;" id="delete-form-{{ $item->id }}">
                                                 @csrf
                                                 {{ method_field('DELETE') }}
                                             </form>
