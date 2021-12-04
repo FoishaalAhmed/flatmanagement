@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\FlatController;
 use App\Http\Controllers\Admin\FloorController;
 use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\ManagerController;
+use App\Http\Controllers\Admin\RentController;
 use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\UserController;
 
@@ -22,6 +23,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
     Route::resource('flats', FlatController::class)->except(['show']);
     Route::resource('tenants', TenantController::class)->except(['show']);
     Route::resource('employees', EmployeeController::class)->except(['show']);
+    Route::resource('rents', RentController::class)->except(['show']);
     Route::resource('employee-salaries', EmployeeSalaryController::class)->except(['show', 'edit', 'update']);
 
     /** Helper Route Start Here **/
