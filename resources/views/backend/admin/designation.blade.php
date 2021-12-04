@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Floor')
+@section('title', 'Designation')
 @section('content')
     <div class="layout-px-spacing">
         <div class="row layout-top-spacing">
@@ -9,11 +9,11 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-6 col-md-6 col-sm-6 col-6">
-                                <h4>{{ __('Floor') }}</h4>
+                                <h4>{{ __('Designation') }}</h4>
                             </div>
                             <div class="col-xl-6 col-md-6 col-sm-6 col-6 text-right">
                                 <a class="btn btn-outline-primary mb-2" data-toggle="modal"
-                                    data-target="#store-modal">{{ __('New Floor') }}</a>
+                                    data-target="#store-modal">{{ __('New Designation') }}</a>
                             </div>
                         </div>
                     </div>
@@ -21,22 +21,19 @@
                         <table id="multi-column-ordering" class="table table-hover" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th width="5%">{{ __('Sl') }}</th>
-                                    <th width="25%">{{ __('Building') }}</th>
-                                    <th width="10%">{{ __('Floor') }}</th>
-                                    <th width="10%">{{ __('Action') }}</th>
+                                    <th style="width: 10%">{{ __('Sl') }}</th>
+                                    <th style="width: 80%">{{ __('Designation') }}</th>
+                                    <th style="width: 10%">{{ __('Action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($floors as $key => $item)
+                                @foreach ($designations as $key => $item)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $item->building->name }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>
                                             <a class="btn btn-sm btn-outline-primary mb-2 bs-tooltip" data-toggle="modal"
                                                 data-target="#update-modal" data-id="{{ $item->id }}"
-                                                data-building_id="{{ $item->building_id }}"
                                                 data-name="{{ $item->name }}" data-toggle="tooltip" data-placement="top"
                                                 title="" data-original-title="Edit"><i class="far fa-edit"></i></a>
 
@@ -44,8 +41,8 @@
                                                 data-placement="top" title="" data-original-title="Delete" href=""
                                                 onclick="if(confirm('Are You Sure To Delete?')){ event.preventDefault(); getElementById('delete-form-{{ $item->id }}').submit(); } else { event.preventDefault(); }"><i
                                                     class="far fa-times-circle"></i></a>
-                                            <form action="{{ route('admin.floors.destroy', [$item->id]) }}" method="post"
-                                                style="display: none;" id="delete-form-{{ $item->id }}">
+                                            <form action="{{ route('admin.designations.destroy', [$item->id]) }}"
+                                                method="post" style="display: none;" id="delete-form-{{ $item->id }}">
                                                 @csrf
                                                 {{ method_field('DELETE') }}
                                             </form>
@@ -60,7 +57,8 @@
                             <div class="modal-dialog modal-xl" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="myExtraLargeModalLabel">{{ __('New Floor') }}</h5>
+                                        <h5 class="modal-title" id="myExtraLargeModalLabel">
+                                            {{ __('New Designation') }}</h5>
                                         <button type="button" class="close" data-dismiss="modal"
                                             aria-label="Close">
                                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -73,22 +71,10 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('admin.floors.index') }}" method="post">
+                                        <form action="{{ route('admin.designations.index') }}" method="post">
                                             @csrf
                                             <div class="row">
-                                                <div class="col-lg-6 col-12 mx-auto">
-                                                    <div class="form-group">
-                                                        <label for="t-text">{{ __('Buildings') }}</label>
-                                                        <select class="form-control" name="building_id" required>
-                                                            @foreach ($buildings as $item)
-                                                                <option value="{{ $item->id }}"
-                                                                    @if (old('building_id') == $item->id) {{ 'selected' }} @endif>
-                                                                    {{ $item->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-12 mx-auto">
+                                                <div class="col-12 mx-auto">
                                                     <div class="form-group">
                                                         <label for="t-text">{{ __('Name') }}</label>
                                                         <input type="text" name="name" placeholder="{{ __('Name') }}"
@@ -121,7 +107,8 @@
                             <div class="modal-dialog modal-xl" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="myExtraLargeModalLabel">{{ __('Update Floor') }}
+                                        <h5 class="modal-title" id="myExtraLargeModalLabel">
+                                            {{ __('Update Designation') }}
                                         </h5>
                                         <button type="button" class="close" data-dismiss="modal"
                                             aria-label="Close">
@@ -139,20 +126,7 @@
                                             @csrf
                                             @method('PUT')
                                             <div class="row">
-                                                <div class="col-lg-6 col-12 mx-auto">
-                                                    <div class="form-group">
-                                                        <label for="t-text">{{ __('Buildings') }}</label>
-                                                        <select class="form-control" name="building_id" id="building_id"
-                                                            required>
-                                                            @foreach ($buildings as $item)
-                                                                <option value="{{ $item->id }}"
-                                                                    @if (old('building_id') == $item->id) {{ 'selected' }} @endif>
-                                                                    {{ $item->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-12 mx-auto">
+                                                <div class="col-12 mx-auto">
                                                     <div class="form-group">
                                                         <label for="t-text">{{ __('Name') }}</label>
                                                         <input type="text" name="name" placeholder="{{ __('Name') }}"
@@ -172,11 +146,7 @@
                                             </div>
                                         </form>
                                     </div>
-
-                                    <div class="modal-footer">
-
-                                    </div>
-
+                                    <div class="modal-footer"></div>
                                 </div>
                             </div>
                         </div>
@@ -193,14 +163,12 @@
 
             var e = $(event.relatedTarget);
             var id = e.data('id');
-            var building_id = e.data('building_id');
             var name = e.data('name');
 
-            var action = "{{ URL::to('admin/floors/update') }}";
+            var action = "{{ URL::to('admin/designations/update') }}";
 
             $("#update-form").attr('action', action);
             $("#id").val(id);
-            $("#building_id").val(building_id);
             $("#name").val(name);
 
         });

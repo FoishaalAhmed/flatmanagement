@@ -106,7 +106,7 @@
                             class="dropdown-toggle">
                             <div class="">
                                 <i class="far fa-building"></i>
-                                <span>{{ __('flats') }}</span>
+                                <span>{{ __('Flats') }}</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -149,6 +149,15 @@
                                 <a href="{{ route('admin.tenants.index') }}"> {{ __('All Tenant') }} </a>
                             </li>
                         </ul>
+                    </li>
+
+                    <li class="menu">
+                        <a href="{{ route('admin.designations.index') }}" data-active="<?php if(request()->is('admin/designations')) echo 'true'; else echo 'false'; ?>" class="dropdown-toggle">
+                            <div class="">
+                                <i class="fas fa-pen-alt"></i>
+                                <span>{{ __('Designation') }}</span>
+                            </div>
+                        </a>
                     </li>
 
                 </ul>

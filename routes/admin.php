@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BuildingController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\FlatController;
 use App\Http\Controllers\Admin\FloorController;
 use App\Http\Controllers\Admin\HelperController;
@@ -15,6 +16,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
     Route::resource('managers', ManagerController::class)->except(['show']);
     Route::resource('buildings', BuildingController::class)->except(['show']);
     Route::resource('floors', FloorController::class)->except(['create', 'show', 'edit']);
+    Route::resource('designations', DesignationController::class)->except(['create', 'show', 'edit']);
     Route::resource('flats', FlatController::class)->except(['show']);
     Route::resource('tenants', TenantController::class)->except(['show']);
 
