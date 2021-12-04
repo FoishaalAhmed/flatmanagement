@@ -21,6 +21,9 @@ class CreateBuildingsTable extends Migration
             $table->boolean('cctv')->default(true);
             $table->boolean('guard')->default(true);
             $table->boolean('parking')->default(true);
+            $table->boolean('lift')->default('true');
+            $table->string('water', 100);
+            $table->string('gas', 100);
             $table->mediumText('address');
             $table->string('photo')->nullable();
             $table->timestamps();

@@ -39,9 +39,30 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->floor }}</td>
                                         <td>{{ $item->flat }}</td>
-                                        <td>{{ $item->guard }}</td>
-                                        <td>{{ $item->cctv }}</td>
-                                        <td>{{ $item->parking }}</td>
+                                        <td>
+                                            @if ($item->guard == 1)
+                                                {{ __('Available') }}
+                                            @else
+                                                {{ __('Not Available') }}
+                                            @endif
+                                            
+                                        </td>
+                                        <td>
+                                            @if ($item->cctv == 1)
+                                                {{ __('Available') }}
+                                            @else
+                                                {{ __('Not Available') }}
+                                            @endif
+                                            
+                                        </td>
+                                        <td>
+                                            @if ($item->parking == 1)
+                                                {{ __('Available') }}
+                                            @else
+                                                {{ __('Not Available') }}
+                                            @endif
+                                            
+                                        </td>
                                         <td>
                                             <div class="d-flex">
                                                 <div class="usr-img-frame mr-2 rounded-circle">

@@ -10,7 +10,7 @@ class Building extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'floor', 'flat', 'cctv', 'guard', 'parking', 'address', 'photo',
+        'name', 'floor', 'flat', 'cctv', 'guard', 'parking', 'lift', 'water', 'gas', 'address', 'photo',
     ];
 
     public static $validateRule = [
@@ -20,6 +20,9 @@ class Building extends Model
         'cctv' => ['required', 'numeric', 'between:0,1'],
         'guard' => ['required', 'numeric', 'between:0,1'],
         'parking' => ['required', 'numeric', 'between:0,1'],
+        'lift' => ['required', 'numeric', 'between:0,1'],
+        'water' => ['required', 'string', 'max: 100'],
+        'gas' => ['required', 'string', 'max: 100'],
         'address' => ['required', 'string'],
         'photo' => ['nullable', 'max: 100', 'mimes:jpeg,jpg,png,gif,webp'],
     ];
@@ -44,6 +47,9 @@ class Building extends Model
         $this->cctv = $request->cctv;
         $this->guard = $request->guard;
         $this->parking = $request->parking;
+        $this->lift = $request->lift;
+        $this->water = $request->water;
+        $this->gas = $request->gas;
         $this->address = $request->address;
         $storeBuilding = $this->save();
 
@@ -72,6 +78,9 @@ class Building extends Model
         $building->cctv = $request->cctv;
         $building->guard = $request->guard;
         $building->parking = $request->parking;
+        $building->lift = $request->lift;
+        $building->water = $request->water;
+        $building->gas = $request->gas;
         $building->address = $request->address;
         $updateBuilding = $building->save();
 

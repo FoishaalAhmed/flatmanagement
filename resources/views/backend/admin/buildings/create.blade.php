@@ -95,6 +95,45 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-xl-4 mb-xl-0 mb-2">
+                                            <label for="t-text">{{ __('Lift') }}</label>
+                                            <select class="form-control" name="lift" required="">
+                                                <option value="1" @if (old('lift') == 1)
+                                                    {{ 'selected' }}
+
+                                                    @endif>{{ __('Available') }}</option>
+
+                                                <option value="0" @if (old('lift') == 0)
+                                                    {{ 'selected' }}
+
+                                                    @endif>{{ __('Not Available') }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-4 mb-xl-0 mb-2">
+                                            <label for="t-text">{{ __('Water') }}</label>
+                                            <select class="form-control" name="water" required="">
+                                                <option value="24 Hour" @if (old('water') == '24 Hour')
+                                                    {{ 'selected' }}
+
+                                                    @endif>{{ __('24 Hour') }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-4 mb-xl-0 mb-2">
+                                            <label for="t-text">{{ __('Gas') }}</label>
+                                            <select class="form-control" name="gas" required="">
+                                                <option value="Supply" @if (old('gas') == 'Supply')
+                                                    {{ 'selected' }}
+
+                                                    @endif>{{ __('Supply') }}</option>
+
+                                                <option value="Cylinder" @if (old('gas') == 'Cylinder')
+                                                    {{ 'selected' }}
+
+                                                    @endif>{{ __('Cylinder') }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-12 mx-auto mb-2">
                                             <div class="form-group">
                                                 <label for="address">{{ __('Address') }}</label>
