@@ -15,6 +15,15 @@ class Employee extends Model
         'building_id', 'name', 'email', 'phone', 'present_address', 'permanent_address', 'nid', 'designation_id', 'join_date', 'leave_date', 'salary', 'status', 'photo',
     ];
 
+    public function getEmployeeWithDesignations()
+    {
+        $employees = $this::join('designations', 'employees.designation_id', '=', 'designations.id')
+            ->orderBy('employees.name', 'asc')
+            ->select('employees.id', 'employees.name', 'employees.salary', 'designations.name as designation')
+            ->get();
+        return $employees;
+    }
+    
     public function getEmployees()
     {
         $employees = $this::join('buildings', 'employees.building_id', '=', 'buildings.id')

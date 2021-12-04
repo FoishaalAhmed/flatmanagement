@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BuildingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\EmployeeSalaryController;
 use App\Http\Controllers\Admin\FlatController;
 use App\Http\Controllers\Admin\FloorController;
 use App\Http\Controllers\Admin\HelperController;
@@ -21,7 +22,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
     Route::resource('flats', FlatController::class)->except(['show']);
     Route::resource('tenants', TenantController::class)->except(['show']);
     Route::resource('employees', EmployeeController::class)->except(['show']);
-    Route::resource('employee-salaries', EmployeeSalaryController::class)->except(['show']);
+    Route::resource('employee-salaries', EmployeeSalaryController::class)->except(['show', 'edit', 'update']);
 
     /** Helper Route Start Here **/
     Route::post('get-floor', [HelperController::class, 'floor'])->name('get.floor');

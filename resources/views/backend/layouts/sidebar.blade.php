@@ -152,7 +152,7 @@
             </li>
 
             <li class="menu">
-                <a href="#employee" data-active="<?php if(request()->is('admin/employees') || request()->is('admin/employees/*') || request()->is('admin/designations')) echo 'true'; else echo 'false'; ?>" data-toggle="collapse" aria-expanded="<?php if(request()->is('admin/employees') || request()->is('admin/employees/*') || request()->is('admin/designations')) echo 'true'; else echo 'false'; ?>"
+                <a href="#employee" data-active="<?php if(request()->is('admin/employees') || request()->is('admin/employees/*') || request()->is('admin/designations') || request()->is('admin/employee-salaries/create') || request()->is('admin/employee-salaries')) echo 'true'; else echo 'false'; ?>" data-toggle="collapse" aria-expanded="<?php if(request()->is('admin/employees') || request()->is('admin/employees/*') || request()->is('admin/designations') || request()->is('admin/employee-salaries/create') || request()->is('admin/employee-salaries')) echo 'true'; else echo 'false'; ?>"
                     class="dropdown-toggle">
                     <div class="">
                         <i class="fas fa-user-shield"></i>
@@ -166,7 +166,7 @@
                         </svg>
                     </div>
                 </a>
-                <ul class="collapse submenu list-unstyled <?php if(request()->is('admin/employees') || request()->is('admin/employees/*') || request()->is('admin/designations')) echo 'show'; ?>" id="employee" data-parent="#accordionExample">
+                <ul class="collapse submenu list-unstyled <?php if(request()->is('admin/employees') || request()->is('admin/employees/*') || request()->is('admin/designations') || request()->is('admin/employee-salaries/create') || request()->is('admin/employee-salaries')) echo 'show'; ?>" id="employee" data-parent="#accordionExample">
                     <li class="<?php if(request()->is('admin/employees/create')) echo 'active'; ?>">
                         <a href="{{ route('admin.designations.index') }}"> {{ __('Designation') }} </a>
                     </li>
@@ -175,6 +175,12 @@
                     </li>
                     <li class="<?php if(request()->is('admin/employees')) echo 'active'; ?>">
                         <a href="{{ route('admin.employees.index') }}"> {{ __('All Employee') }} </a>
+                    </li>
+                    <li class="<?php if(request()->is('admin/employee-salaries/create')) echo 'active'; ?>">
+                        <a href="{{ route('admin.employee-salaries.create') }}"> {{ __('New Salary') }} </a>
+                    </li>
+                    <li class="<?php if(request()->is('admin/employee-salaries')) echo 'active'; ?>">
+                        <a href="{{ route('admin.employee-salaries.index') }}"> {{ __('All Salary') }} </a>
                     </li>
                 </ul>
             </li>

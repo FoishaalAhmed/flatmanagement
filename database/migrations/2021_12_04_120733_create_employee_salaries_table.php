@@ -17,7 +17,7 @@ class CreateEmployeeSalariesTable extends Migration
             $table->id();
             $table->foreignId('employee_id')->constrained()->onDelete('cascade');
             $table->date('date');
-            $table->string('month')->index();
+            $table->string('month', 15)->index();
             $table->integer('year')->index();
             $table->integer('salary');
             $table->integer('paid');
