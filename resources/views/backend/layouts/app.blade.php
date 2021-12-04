@@ -40,6 +40,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/plugins/select2/select2.min.css') }}">
     <link href="{{ asset('public/frontend/assets/css/components/custom-modal.css') }}" rel="stylesheet"
         type="text/css" />
+    <link href="{{ asset('public/frontend/plugins/flatpickr/flatpickr.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/frontend/plugins/flatpickr/custom-flatpickr.css') }}" rel="stylesheet"
+        type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
     <!--  END CUSTOM STYLE FILE  -->
 
@@ -205,6 +208,8 @@
     <script src="{{ asset('public/frontend/assets/js/scrollspyNav.js') }}"></script>
     <script src="{{ asset('public/frontend/plugins/select2/select2.min.js') }}"></script>
     <script src="{{ asset('public/frontend/plugins/select2/custom-select2.js') }}"></script>
+    <script src="{{ asset('public/frontend/plugins/flatpickr/flatpickr.js') }}"></script>
+    <script src="{{ asset('public/frontend/plugins/flatpickr/custom-flatpickr.js') }}"></script>
     <!--  END CUSTOM SCRIPTS FILE  -->
 
     <script>

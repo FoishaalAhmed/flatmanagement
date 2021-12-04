@@ -45,7 +45,7 @@
                                             @else
                                                 {{ __('Not Available') }}
                                             @endif
-                                            
+
                                         </td>
                                         <td>
                                             @if ($item->cctv == 1)
@@ -53,7 +53,7 @@
                                             @else
                                                 {{ __('Not Available') }}
                                             @endif
-                                            
+
                                         </td>
                                         <td>
                                             @if ($item->parking == 1)
@@ -61,7 +61,7 @@
                                             @else
                                                 {{ __('Not Available') }}
                                             @endif
-                                            
+
                                         </td>
                                         <td>
                                             <div class="d-flex">
@@ -72,10 +72,12 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a class="btn btn-sm btn-outline-primary mb-2"
-                                                href="{{ route('admin.buildings.edit', $item->id) }}" title="Edit"><i
-                                                    class="far fa-edit"></i></a>
-                                            <a class="btn btn-sm btn-outline-danger mb-2" title="Delete" href=""
+                                            <a class="btn btn-sm btn-outline-primary mb-2 bs-tooltip"
+                                                href="{{ route('admin.buildings.edit', $item->id) }}"
+                                                data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title="Edit"><i class="far fa-edit"></i></a>
+                                            <a class="btn btn-sm btn-outline-danger mb-2 bs-tooltip" data-toggle="tooltip"
+                                                data-placement="top" title="" data-original-title="Delete" href=""
                                                 onclick="if(confirm('Are You Sure To Delete?')){ event.preventDefault(); getElementById('delete-form-{{ $item->id }}').submit(); } else { event.preventDefault(); }"><i
                                                     class="far fa-times-circle"></i></a>
                                             <form action="{{ route('admin.buildings.destroy', [$item->id]) }}"

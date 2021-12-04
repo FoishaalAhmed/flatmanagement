@@ -34,14 +34,18 @@
                                         <td>{{ $item->building->name }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-outline-primary mb-2" data-toggle="modal"
-                                                data-target="#update-modal" data-id="{{ $item->id }}"  data-building_id="{{ $item->building_id }}" data-name="{{ $item->name }}" title="Edit"><i class="far fa-edit"></i></a>
+                                            <a class="btn btn-sm btn-outline-primary mb-2 bs-tooltip" data-toggle="modal"
+                                                data-target="#update-modal" data-id="{{ $item->id }}"
+                                                data-building_id="{{ $item->building_id }}"
+                                                data-name="{{ $item->name }}" data-toggle="tooltip" data-placement="top"
+                                                title="" data-original-title="Edit"><i class="far fa-edit"></i></a>
 
-                                            <a class="btn btn-sm btn-outline-danger mb-2" title="Delete" href=""
+                                            <a class="btn btn-sm btn-outline-danger mb-2 bs-tooltip" data-toggle="tooltip"
+                                                data-placement="top" title="" data-original-title="Delete" href=""
                                                 onclick="if(confirm('Are You Sure To Delete?')){ event.preventDefault(); getElementById('delete-form-{{ $item->id }}').submit(); } else { event.preventDefault(); }"><i
                                                     class="far fa-times-circle"></i></a>
-                                            <form action="{{ route('admin.floors.destroy', [$item->id]) }}"
-                                                method="post" style="display: none;" id="delete-form-{{ $item->id }}">
+                                            <form action="{{ route('admin.floors.destroy', [$item->id]) }}" method="post"
+                                                style="display: none;" id="delete-form-{{ $item->id }}">
                                                 @csrf
                                                 {{ method_field('DELETE') }}
                                             </form>

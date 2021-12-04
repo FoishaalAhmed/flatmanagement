@@ -53,9 +53,9 @@ class Manager extends Model
         }
         BuildingUser::insert($category_data);
 
-        $manager_info = User::findOrFail($this->id);
+        $manager = User::findOrFail($this->id);
         $role = Role::where('name', 'Manager')->first();
-        $manager_info->assignRole($role);
+        $manager->assignRole($role);
 
         $managerStore
             ? session()->flash('success', 'New Manager Created Successfully!')
