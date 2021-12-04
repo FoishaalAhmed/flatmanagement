@@ -101,6 +101,31 @@
                         </a>
                     </li>
 
+                    <li class="menu">
+                        <a href="#flat" data-active="<?php if(request()->is('admin/flats') || request()->is('admin/flats/*')) echo 'true'; else echo 'false'; ?>" data-toggle="collapse" aria-expanded="<?php if(request()->is('admin/flats') || request()->is('admin/flats/*')) echo 'true'; else echo 'false'; ?>"
+                            class="dropdown-toggle">
+                            <div class="">
+                                <i class="far fa-building"></i>
+                                <span>{{ __('flats') }}</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-chevron-right">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled <?php if(request()->is('admin/flats') || request()->is('admin/flats/*')) echo 'show'; ?>" id="flat" data-parent="#accordionExample">
+                            <li class="<?php if(request()->is('admin/flats/create')) echo 'active'; ?>">
+                                <a href="{{ route('admin.flats.create') }}"> {{ __('New Flat') }} </a>
+                            </li>
+                            <li class="<?php if(request()->is('admin/flats')) echo 'active'; ?>">
+                                <a href="{{ route('admin.flats.index') }}"> {{ __('All Flat') }} </a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </nav>
 

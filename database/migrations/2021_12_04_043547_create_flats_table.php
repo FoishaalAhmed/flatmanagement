@@ -17,12 +17,15 @@ class CreateFlatsTable extends Migration
             $table->id();
             $table->foreignId('building_id')->constrained()->onDelete('cascade');
             $table->foreignId('floor_id')->constrained()->onDelete('cascade');
-            $table->string('name');
+            $table->string('name', 50);
             $table->integer('area');
-            $table->integer('room');
-            $table->integer('washroom');
-            $table->integer('kitchen');
-            $table->string('drawing_dining');
+            $table->tinyInteger('room');
+            $table->tinyInteger('washroom');
+            $table->tinyInteger('kitchen');
+            $table->tinyInteger('balcony');
+            $table->string('drawing_dining', 100);
+            $table->mediumText('description')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
