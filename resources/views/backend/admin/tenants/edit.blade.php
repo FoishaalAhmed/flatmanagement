@@ -127,7 +127,7 @@
                                             <label for="t-text">{{ __('Issue Month') }}</label>
                                             <select class="form-control tagging" name="month" required="">
                                                 @foreach ($months as $item)
-                                                    <option value="{{ $item->id }}" @if ($tenant->month == $item->id) {{ 'selected' }} @endif>
+                                                    <option value="{{ $item->name }}" @if ($tenant->month == $item->name) {{ 'selected' }} @endif>
                                                         {{ $item->name }}</option>
                                                 @endforeach
                                             </select>
@@ -159,7 +159,8 @@
                                         <div class="widget-content widget-content-area">
                                             <h3 class="">{{ __('Tenant Photo') }}</h3>
                                             <div class="text-center user-info">
-                                                <img src="{{ asset($tenant->photo) }}" alt="avatar" id="tenant-photo" style="width: 100px">
+                                                <img src="{{ asset($tenant->photo) }}" alt="avatar" id="tenant-photo"
+                                                    style="width: 100px">
                                                 <p class="text-danger">
                                                     *{{ __('Photo Can Not Be Greater Than 100 KB') }}</p>
                                                 <input type="file" id="input-file-max-fs" class="dropify"

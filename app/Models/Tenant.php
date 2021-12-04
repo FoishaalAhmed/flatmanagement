@@ -51,7 +51,7 @@ class Tenant extends Model
         $this->nid = $request->nid;
         $this->advance = $request->advance;
         $this->rent = $request->rent;
-        $this->issue_date = $request->issue_date;
+        $this->issue_date = date('Y-m-d', strtotime($request->issue_date));
         $this->month = $request->month;
         $this->year = $request->year;
         $storeTenant = $this->save();
@@ -97,7 +97,7 @@ class Tenant extends Model
         $tenant->nid = $request->nid;
         $tenant->advance = $request->advance;
         $tenant->rent = $request->rent;
-        $tenant->issue_date = $request->issue_date;
+        $tenant->issue_date = date('Y-m-d', strtotime($request->issue_date));
         $tenant->month = $request->month;
         $tenant->year = $request->year;
         $updateTenant = $tenant->save();
