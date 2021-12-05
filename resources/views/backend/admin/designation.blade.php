@@ -18,6 +18,7 @@
                         </div>
                     </div>
                     <div class="widget-content widget-content-area br-6">
+                        @include('includes.error')
                         <table id="multi-column-ordering" class="table table-hover" style="width:100%">
                             <thead>
                                 <tr>
