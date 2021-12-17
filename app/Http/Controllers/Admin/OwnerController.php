@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OwnerRequest;
+use App\Models\Building;
 use App\Models\Flat;
 use App\Models\FlatOwner;
 use App\Models\Owner;
@@ -27,8 +28,8 @@ class OwnerController extends Controller
 
     public function create()
     {
-        $flats = Flat::orderBy('name', 'asc')->select('id', 'name')->get();
-        return view('backend.admin.owners.create', compact('flats'));
+        $buildings = Building::orderBy('name', 'asc')->select('id', 'name')->get();
+        return view('backend.admin.owners.create', compact('buildings'));
     }
 
     public function store(OwnerRequest $request)
@@ -39,9 +40,10 @@ class OwnerController extends Controller
 
     public function edit(Owner $owner)
     {
-        $flats = Flat::orderBy('name', 'asc')->select('id', 'name')->get();
+        $buildings = Building::orderBy('name', 'asc')->select('id', 'name')->get();
+        $flats = Flat::where('building_id', $owner->building_id)->orderBy('name', 'asc')->select('id', 'name')->get();
         $flatOwners = FlatOwner::where('owner_id', $owner->id)->pluck('flat_id')->toArray();
-        return view('backend.admin.owners.edit', compact('flats', 'owner', 'flatOwners'));
+        return view('backend.admin.owners.edit', compact('flats', 'owner', 'flatOwners', 'buildings'));
     }
 
     public function update(OwnerRequest $request, Owner $owner)

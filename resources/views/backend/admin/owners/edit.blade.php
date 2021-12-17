@@ -53,9 +53,22 @@
                                         </div>
                                         <div class="col-lg-6 col-12 mx-auto">
                                             <div class="form-group">
+                                                <label for="t-text">{{ __('Buildings') }}</label>
+                                                <select class="form-control form-small tagging" name="building_id" required
+                                                    onchange="getBuildingFlats(this.value)" id="building_id">
+                                                    <option value="">{{ __('Select One Building') }}</option>
+                                                    @foreach ($buildings as $item)
+                                                        <option value="{{ $item->id }}" @if ($owner->building_id == $item->id) {{ 'selected' }} @endif>
+                                                            {{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-12 mx-auto">
+                                            <div class="form-group">
                                                 <label for="t-text">{{ __('Flats') }}</label>
                                                 <select class="form-control form-small tagging" multiple="multiple"
-                                                    name="flat_id[]" required>
+                                                    name="flat_id[]" id="flat_id" required>
                                                     @foreach ($flats as $item)
                                                         <option value="{{ $item->id }}" @if (in_array($item->id, $flatOwners)) {{ 'selected' }} @endif>
                                                             {{ $item->name }}</option>
@@ -129,6 +142,40 @@
                 };
                 reader.readAsDataURL(input.files[0]);
             }
+        }
+
+        function getBuildingFlats(building_id) {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': '{{ csrf_token() }}'
+                }
+            });
+
+            $.ajax({
+
+                url: '{{ route('admin.get.building.flats') }}',
+                method: 'POST',
+                data: {
+                    'building_id': building_id,
+                },
+                success: function(data2) {
+                    let data = JSON.parse(data2);
+
+                    $('#flat_id').find('option').remove().end();
+
+                    $.each(data, function(i, item) {
+                        $("#flat_id").append($('<option>', {
+                            value: this.id,
+                            text: this.name,
+                        }));
+                    });
+                },
+
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         }
     </script>
 

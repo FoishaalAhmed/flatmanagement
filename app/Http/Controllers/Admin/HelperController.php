@@ -45,6 +45,16 @@ class HelperController extends Controller
         echo json_encode($flats);
     }
 
+    public function buildingFlats(Request $request)
+    {
+        $flats = DB::table("flats")
+            ->where('building_id', $request->building_id)
+            ->orderBy('name', 'asc')
+            ->select('id', 'name')
+            ->get();
+        echo json_encode($flats);
+    }
+
     public function tenant(Request $request)
     {
         $tenants = Tenant::where('flat_id', $request->flat_id)

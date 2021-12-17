@@ -15,6 +15,7 @@ class CreateOwnersTable extends Migration
     {
         Schema::create('owners', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('building_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique();

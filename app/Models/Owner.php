@@ -33,6 +33,7 @@ class Owner extends Model
             $this->photo     = $image_url;
         }
 
+        $this->building_id = $request->building_id ;
         $this->name = $request->name ;
         $this->email = $request->email ;
         $this->phone = $request->phone ;
@@ -82,6 +83,7 @@ class Owner extends Model
             $owner->photo    = $image_url;
         }
 
+        $owner->building_id = $request->building_id ;
         $owner->name = $request->name ;
         $owner->email = $request->email ;
         $owner->phone = $request->phone ;

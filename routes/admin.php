@@ -32,6 +32,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
     Route::post('get-floor', [HelperController::class, 'floor'])->name('get.floor');
     Route::post('get-flat', [HelperController::class, 'flat'])->name('get.flat');
     Route::post('get-flats', [HelperController::class, 'flats'])->name('get.flats');
+    Route::post('get-building-flats', [HelperController::class, 'buildingFlats'])->name('get.building.flats');
     Route::post('get-tenant', [HelperController::class, 'tenant'])->name('get.tenant');
     /** Helper Route End Here **/
 });
