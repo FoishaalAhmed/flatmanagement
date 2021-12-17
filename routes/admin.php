@@ -12,10 +12,12 @@ use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\RentController;
 use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\OwnerController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'admin']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UserController::class)->except(['show']);
+    Route::resource('owners', OwnerController::class)->except(['show']);
     Route::resource('managers', ManagerController::class)->except(['show']);
     Route::resource('buildings', BuildingController::class)->except(['show']);
     Route::resource('floors', FloorController::class)->except(['create', 'show', 'edit']);
