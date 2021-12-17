@@ -13,6 +13,26 @@ class Rent extends Model
         'building_id', 'floor_id', 'flat_id', 'tenant_id', 'invoice', 'date', 'rent', 'month', 'year', 'water_bill', 'gas_bill', 'electricity_bill', 'security_bill', 'utility_bill', 'service_bill', 'other_bill', 'total_rent', 'paid', 'status',
     ];
 
+    public static $validateRule = [
+        'building_id' => ['required', 'numeric', 'min: 1'],
+        'floor_id' => ['required', 'numeric', 'min: 1'],
+        'flat_id' => ['required', 'numeric', 'min: 1'],
+        'tenant_id' => ['required', 'numeric', 'min: 1'],
+        'date' => ['required', 'date'],
+        'rent' => ['required', 'numeric', 'min: 1'],
+        'month' => ['required', 'string', 'max: 9'],
+        'year' => ['required', 'numeric'],
+        'water_bill' => ['required', 'numeric', 'min: 1'],
+        'gas_bill' => ['required', 'numeric', 'min: 1'],
+        'electricity_bill' => ['required', 'numeric', 'min: 1'],
+        'security_bill' => ['required', 'numeric', 'min: 1'],
+        'utility_bill' => ['required', 'numeric', 'min: 1'],
+        'service_bill' => ['required', 'numeric', 'min: 1'],
+        'other_bill' => ['required', 'numeric', 'min: 1'],
+        'total_rent' => ['required', 'numeric', 'min: 1'],
+        'paid' => ['required', 'numeric', 'min: 1'],
+    ];
+
     public function getRents()
     {
         $rents = $this->join('buildings', 'rents.building_id', '=', 'buildings.id')
@@ -48,6 +68,7 @@ class Rent extends Model
         $this->other_bill = $request->other_bill;
         $this->total_rent = $request->total_rent;
         $this->paid = $request->paid;
+        $this->status = 1;
         $storeRent = $this->save();
 
         $storeRent

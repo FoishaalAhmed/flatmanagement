@@ -9,10 +9,10 @@ use App\Http\Controllers\Admin\FlatController;
 use App\Http\Controllers\Admin\FloorController;
 use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\ManagerController;
+use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\RentController;
 use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\OwnerController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'admin']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -25,11 +25,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
     Route::resource('flats', FlatController::class)->except(['show']);
     Route::resource('tenants', TenantController::class)->except(['show']);
     Route::resource('employees', EmployeeController::class)->except(['show']);
-    Route::resource('rents', RentController::class)->except(['show']);
+    Route::resource('rents', RentController::class)->except(['edit', 'update']);
     Route::resource('employee-salaries', EmployeeSalaryController::class)->except(['show', 'edit', 'update']);
 
     /** Helper Route Start Here **/
     Route::post('get-floor', [HelperController::class, 'floor'])->name('get.floor');
     Route::post('get-flat', [HelperController::class, 'flat'])->name('get.flat');
+    Route::post('get-flats', [HelperController::class, 'flats'])->name('get.flats');
+    Route::post('get-tenant', [HelperController::class, 'tenant'])->name('get.tenant');
     /** Helper Route End Here **/
 });

@@ -3,84 +3,56 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Building;
+use App\Models\Flat;
+use App\Models\Floor;
+use App\Models\Month;
 use App\Models\Rent;
+use App\Models\Tenant;
 use Illuminate\Http\Request;
 
 class RentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $rentObject;
+
+    public function __construct()
+    {
+        $this->rentObject = new Rent();
+    }
+
     public function index()
     {
-        //
+        $rents = $this->rentObject->getRents();
+        return view('backend.admin.rents.index', compact('rents'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $buildings = Building::orderBy('name', 'asc')->select('id', 'name')->get();
+        $months = Month::select('id', 'name')->get();
+        return view('backend.admin.rents.create', compact('buildings', 'months'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate(Rent::$validateRule);
+        $this->rentObject->storeRent($request);
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Rent  $rent
-     * @return \Illuminate\Http\Response
-     */
     public function show(Rent $rent)
     {
-        //
+        $buildings = Building::orderBy('name', 'asc')->select('id', 'name')->get();
+        $floors = Floor::where('building_id', $rent->building_id)->orderBy('name', 'asc')->select('id', 'name')->get();
+        $flats = Flat::where('floor_id', $rent->floor_id)->orderBy('name', 'asc')->select('id', 'name')->get();
+        $tenants = Tenant::orderBy('name', 'asc')->select('id', 'name')->get();
+        $months = Month::select('id', 'name')->get();
+        return view('backend.admin.rents.show', compact('buildings', 'floors', 'flats', 'tenants', 'months', 'rent'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Rent  $rent
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Rent $rent)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Rent  $rent
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Rent $rent)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Rent  $rent
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Rent $rent)
     {
-        //
+        $this->rentObject->destroyRent($rent);
+        return back();
     }
 }
