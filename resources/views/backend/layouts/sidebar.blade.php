@@ -127,10 +127,35 @@
             </li>
             
             <li class="menu">
+                <a href="#owner" data-active="<?php if(request()->is('admin/owners') || request()->is('admin/owners/*')) echo 'true'; else echo 'false'; ?>" data-toggle="collapse" aria-expanded="<?php if(request()->is('admin/owners') || request()->is('admin/owners/*')) echo 'true'; else echo 'false'; ?>"
+                    class="dropdown-toggle">
+                    <div class="">
+                        <i class="fas fa-users-cog"></i>
+                        <span>{{ __('Owners') }}</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-chevron-right">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled <?php if(request()->is('admin/owners') || request()->is('admin/owners/*')) echo 'show'; ?>" id="owner" data-parent="#accordionExample">
+                    <li class="<?php if(request()->is('admin/owners/create')) echo 'active'; ?>">
+                        <a href="{{ route('admin.owners.create') }}"> {{ __('New Owner') }} </a>
+                    </li>
+                    <li class="<?php if(request()->is('admin/owners')) echo 'active'; ?>">
+                        <a href="{{ route('admin.owners.index') }}"> {{ __('All Owner') }} </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu">
                 <a href="#tenant" data-active="<?php if(request()->is('admin/tenants') || request()->is('admin/tenants/*')) echo 'true'; else echo 'false'; ?>" data-toggle="collapse" aria-expanded="<?php if(request()->is('admin/tenants') || request()->is('admin/tenants/*')) echo 'true'; else echo 'false'; ?>"
                     class="dropdown-toggle">
                     <div class="">
-                        <i class="fas fa-user-shield"></i>
+                        <i class="fas fa-user-tag"></i>
                         <span>{{ __('Tenants') }}</span>
                     </div>
                     <div>
@@ -181,6 +206,31 @@
                     </li>
                     <li class="<?php if(request()->is('admin/employee-salaries')) echo 'active'; ?>">
                         <a href="{{ route('admin.employee-salaries.index') }}"> {{ __('All Salary') }} </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu">
+                <a href="#cost" data-active="<?php if(request()->is('admin/costs') || request()->is('admin/costs/*')) echo 'true'; else echo 'false'; ?>" data-toggle="collapse" aria-expanded="<?php if(request()->is('admin/costs') || request()->is('admin/costs/*')) echo 'true'; else echo 'false'; ?>"
+                    class="dropdown-toggle">
+                    <div class="">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>{{ __('Maintain Costs') }}</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-chevron-right">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled <?php if(request()->is('admin/costs') || request()->is('admin/costs/*')) echo 'show'; ?>" id="cost" data-parent="#accordionExample">
+                    <li class="<?php if(request()->is('admin/costs/create')) echo 'active'; ?>">
+                        <a href="{{ route('admin.costs.create') }}"> {{ __('New Cost') }} </a>
+                    </li>
+                    <li class="<?php if(request()->is('admin/costs')) echo 'active'; ?>">
+                        <a href="{{ route('admin.costs.index') }}"> {{ __('All Cost') }} </a>
                     </li>
                 </ul>
             </li>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BuildingController;
+use App\Http\Controllers\Admin\CostController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\EmployeeController;
@@ -26,6 +27,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
     Route::resource('tenants', TenantController::class)->except(['show']);
     Route::resource('employees', EmployeeController::class)->except(['show']);
     Route::resource('rents', RentController::class)->except(['edit', 'update']);
+    Route::resource('costs', CostController::class)->except(['show', 'edit', 'update']);
     Route::resource('employee-salaries', EmployeeSalaryController::class)->except(['show', 'edit', 'update']);
 
     /** Helper Route Start Here **/
