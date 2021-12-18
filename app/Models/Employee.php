@@ -115,9 +115,13 @@ class Employee extends Model
 
     public function destroyEmployee(Object $employee)
     {
+        $user = User::where('employee_id', $employee->id)->firstOrFail();
+        if (file_exists($user->photo)) unlink($user->photo);
         if (file_exists($employee->photo)) unlink($employee->photo);
-        $updateEmployee = $employee->delete();
-        $updateEmployee
+        $user->removeRole($user->roles->first());
+        $user->delete();
+        $destroyEmployee = $employee->delete();
+        $destroyEmployee
             ? session()->flash('success', 'Employee Deleted Successfully!')
             : session()->flash('error', 'Something Went Wrong!');
     }

@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('tenant_id')->nullable()->index();
             $table->bigInteger('employee_id')->nullable()->index();
             $table->bigInteger('owner_id')->nullable()->index();
+            $table->bigInteger('committee_id')->nullable()->index();
             $table->string('photo')->nullable();
             $table->rememberToken();
             $table->timestamps();
